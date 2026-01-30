@@ -13,3 +13,6 @@ sed -i 's/LEDE/OneCloud/g' package/base-files/files/bin/config_generate
 
 # 替换终端为bash
 sed -i 's/\/bin\/ash/\/bin\/bash/' package/base-files/files/etc/passwd
+
+# 自定义取消密码
+sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz-default-settings
