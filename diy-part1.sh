@@ -2,7 +2,8 @@
 # Description: OpenWrt DIY script part 1 (Before Update feeds)
 
 # Add a feed source
-sed -i '1i src-git packages https://github.com/openwrt/packages.git;openwrt-23.05' feeds.conf.default
-sed -i '2i src-git luci https://github.com/openwrt/luci.git;openwrt-23.05' feeds.conf.default
-sed -i '3i src-git routing https://github.com/openwrt/routing.git;openwrt-23.05' feeds.conf.default
-sed -i '4i src-git telephony https://github.com/openwrt/telephony.git;openwrt-23.05' feeds.conf.default
+sed -i 's|https://git.openwrt.org/feed/packages.git|https://github.com/openwrt/packages.git|g' feeds.conf.default
+sed -i 's|https://git.openwrt.org/project/luci.git|https://github.com/openwrt/luci.git|g' feeds.conf.default
+sed -i 's|https://git.openwrt.org/feed/routing.git|https://github.com/openwrt/routing.git|g' feeds.conf.default
+sed -i 's|https://git.openwrt.org/feed/telephony.git|https://github.com/openwrt/telephony.git|g' feeds.conf.default
+echo "src-git kenzo https://github.com/kenzok8/openwrt-packages.git" >> feeds.conf.default
