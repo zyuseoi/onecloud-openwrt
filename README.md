@@ -1,8 +1,6 @@
-项目暂停
+项目介绍
 
-上游lede更新内核6.6 设备树未找到meson8b-onecloud支持
-
-编译版本：lede-25.10
+编译版本：lede-25.8
 
 自定义插件：passwall、ddns、frpc、frps、upnp、turbo-acc
 
