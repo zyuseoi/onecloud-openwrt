@@ -13,8 +13,12 @@
 name: OpenWrt Builder
 
 on:
-  repository_dispatch:
   workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to build (e.g. 2026.02.04-1343)'
+        required: true
+        type: string
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
@@ -66,15 +70,11 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        echo "Downloading source for tag: ${{ github.event.inputs.tag || github.ref_name }}"
-        TAG=${{ github.event.inputs.tag || github.ref_name }}
-        if [[ -z "$TAG" ]]; then
-          echo "⚠️ No tag found, falling back to main"
-          TAG=main
-        fi
-        wget https://github.com/zyuseoi/onecloud-openwrt/archive/refs/tags/$TAG.tar.gz -O openwrt-source.tar.gz
+        TAG="${{ github.event.inputs.tag }}"
+        echo "Downloading source for tag: $TAG"
+        wget "https://github.com/zyuseoi/onecloud-openwrt/archive/refs/tags/$TAG.tar.gz" -O openwrt-source.tar.gz
         tar -xzf openwrt-source.tar.gz
-        mv onecloud-openwrt-$TAG openwrt
+        mv "onecloud-openwrt-$TAG" openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
     - name: Load custom feeds
