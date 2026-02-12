@@ -66,15 +66,11 @@ jobs:
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
 
-    - name: Download frozen source from my release tag
+    - name: Clone source code
       working-directory: /workdir
       run: |
         df -hT $PWD
-        TAG="${{ github.event.inputs.tag }}"
-        echo "Downloading source for tag: $TAG"
-        wget "https://github.com/zyuseoi/onecloud-openwrt/archive/refs/tags/$TAG.tar.gz" -O openwrt-source.tar.gz
-        tar -xzf openwrt-source.tar.gz
-        mv "onecloud-openwrt-$TAG" openwrt
+        git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
     - name: Load custom feeds
