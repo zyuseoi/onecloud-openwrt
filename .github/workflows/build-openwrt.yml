@@ -13,12 +13,8 @@
 name: OpenWrt Builder
 
 on:
+  repository_dispatch:
   workflow_dispatch:
-    inputs:
-      tag:
-        description: 'Release tag to build (e.g. 2026.02.04-1343)'
-        required: true
-        type: string
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
